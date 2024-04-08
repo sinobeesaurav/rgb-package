@@ -64,7 +64,7 @@ class Rgb {
     }
     transfer(params) {
         return __awaiter(this, void 0, void 0, function* () {
-            var _a, _b, _c, _d, _e;
+            var _a, _b, _c, _d;
             try {
                 const resOfCreateUtxos = yield this.rgbApi.post("create_UTXOs", {
                     wallet_address: this.walletAddress,
@@ -87,11 +87,7 @@ class Rgb {
                     `Unable to prepare blinded UTXOs. err = RgbLibError.InsufficientSpendableAssets(asset_id='${params.assetId}')`) {
                     throw new ChainOperationError_1.default("Transfer", "RGB", "Insufficient asset amount or waiting for confirmation of another transfer");
                 }
-                if (((_d = resOfTransferApi === null || resOfTransferApi === void 0 ? void 0 : resOfTransferApi.data) === null || _d === void 0 ? void 0 : _d.msg) ===
-                    `ChainOperationError: Unable to prepare blinded UTXOs. err = RgbLibError.InvalidBlindedUtxo(details="type requires 'utxob' as a Baid58 human-readable identifier, while 'bcrt1q67h' was provided")`) {
-                    throw new ChainOperationError_1.default("Transfer", "RGB", "Invalid Blind utxo");
-                }
-                if (((_e = resOfTransferApi === null || resOfTransferApi === void 0 ? void 0 : resOfTransferApi.data) === null || _e === void 0 ? void 0 : _e.status) === "err") {
+                if (((_d = resOfTransferApi === null || resOfTransferApi === void 0 ? void 0 : resOfTransferApi.data) === null || _d === void 0 ? void 0 : _d.status) === "err") {
                     throw new ChainOperationError_1.default("Transfer", "RGB", resOfTransferApi.data.msg);
                 }
                 return resOfTransferApi.data;
